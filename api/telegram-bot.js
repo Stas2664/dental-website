@@ -16,7 +16,10 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { name, age, phone, complaints } = req.body;
+        const { name, age, phone: rawPhone, complaints } = req.body;
+        
+        // Очищаем телефон от возможных артефактов
+        const phone = rawPhone.trim();
 
         // Проверяем обязательные поля
         if (!name || !phone || !complaints) {
@@ -32,7 +35,7 @@ export default async function handler(req, res) {
 
 👤 *Пациент:* ${name}
 🎂 *Возраст:* ${age} лет
-📞 *Телефон:* [${phone}](tel:${phone})
+📞 *Телефон:* ${phone}
 🩺 *Жалобы:* ${complaints}
 
 ⏰ *Дата/время:* ${new Date().toLocaleString('ru-RU', {
