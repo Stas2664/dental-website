@@ -1,150 +1,173 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Зубко Анастасия Викторовна - Врач-стоматолог</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Стили для секции отзывов */
+        .reviews-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 80px 0;
+            margin-top: 0;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .hero-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            margin-bottom: 40px;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            min-height: 600px;
-        }
-
-        .hero-text {
-            padding: 60px;
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+        .reviews-title {
+            text-align: center;
+            font-size: 36px;
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 10px;
-            line-height: 1.2;
+            margin-bottom: 50px;
+            position: relative;
         }
 
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-weight: 300;
+        .reviews-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
         }
 
-        .specializations {
-            list-style: none;
-            margin-bottom: 40px;
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .specializations li {
+        .review-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-info {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            color: #34495e;
+            gap: 12px;
         }
 
-        .specializations li i {
-            color: #3498db;
-            margin-right: 15px;
-            font-size: 1.2rem;
-        }
-
-        .application-btn {
-            display: inline-flex;
-            align-items: center;
+        .reviewer-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 18px 35px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-            font-family: inherit;
-        }
-
-        .application-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-            background: linear-gradient(135deg, #5a6fd8, #6639a6);
-        }
-
-        .application-btn i {
-            margin-right: 12px;
-            font-size: 1.3rem;
-        }
-
-        /* Плавающая кнопка WhatsApp */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .whatsapp-float {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            border-radius: 50%;
-            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .reviewer-name {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
+        .review-rating {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            font-size: 16px;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+
+        .review-text {
+            color: #495057;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-service {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-            animation: whatsappPulse 2s infinite;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        /* Адаптивность для отзывов */
+        @media (max-width: 768px) {
+            .reviews-section {
+                padding: 60px 0;
+            }
+            
+            .reviews-title {
+                font-size: 28px;
+                margin-bottom: 35px;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+            
+            .review-card {
+                padding: 20px;
+            }
+            
+            .reviewer-name {
+                font-size: 15px;
+            }
+            
+            .review-text {
+                font-size: 14px;
+            }
         }
 
-        @keyframes whatsappPulse {
-            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 10px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        .hero-image {
+        /* Адаптивность для мобильных (footer) */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer {
+                padding: 40px 0 20px 0;
+                margin-top: 60px;
+            }
+            
+            .footer-section h3 {
+                font-size: 20px;
+            }
+            
+            .services-list li {
+                font-size: 15px;
+            }
+        }o-image {
             position: relative;
             height: 600px;
             overflow: hidden;
@@ -1578,7 +1601,157 @@
             font-size: 14px;
         }
 
-        /* Адаптивность для мобильных */
+        /* Стили для секции отзывов */
+        .reviews-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 80px 0;
+            margin-top: 0;
+        }
+
+        .reviews-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .reviews-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .reviewer-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .reviewer-name {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
+        .review-rating {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            font-size: 16px;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+
+        .review-text {
+            color: #495057;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-service {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Адаптивность для отзывов */
+        @media (max-width: 768px) {
+            .reviews-section {
+                padding: 60px 0;
+            }
+            
+            .reviews-title {
+                font-size: 28px;
+                margin-bottom: 35px;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+            
+            .review-card {
+                padding: 20px;
+            }
+            
+            .reviewer-name {
+                font-size: 15px;
+            }
+            
+            .review-text {
+                font-size: 14px;
+            }
+        }
+
+        /* Адаптивность для мобильных (footer) */
         @media (max-width: 768px) {
             .footer-content {
                 grid-template-columns: 1fr;
@@ -1599,6 +1772,86 @@
             }
         }
     </style>
+
+    <!-- Секция отзывов -->
+    <section class="reviews-section">
+        <div class="container">
+            <h2 class="reviews-title">Отзывы пациентов</h2>
+            <div class="reviews-grid">
+                <!-- Отзыв 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">М</div>
+                            <div class="reviewer-details">
+                                <h4 class="reviewer-name">Мария Петрова</h4>
+                                <div class="review-date">2 недели назад</div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        "Анастасия Викторовна - прекрасный специалист! Лечила кариес под микроскопом - все прошло быстро и совершенно безболезненно. Очень внимательное отношение, все объясняет и показывает. Рекомендую всем!"
+                    </div>
+                    <div class="review-service">Лечение кариеса</div>
+                </div>
+
+                <!-- Отзыв 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">А</div>
+                            <div class="reviewer-details">
+                                <h4 class="reviewer-name">Александр Иванов</h4>
+                                <div class="review-date">1 месяц назад</div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        "Делал эндодонтическое лечение. Сложный случай, но Анастасия Викторовна справилась на отлично! Использует современное оборудование, работает очень аккуратно. Зуб сохранен, боль прошла. Спасибо большое!"
+                    </div>
+                    <div class="review-service">Эндодонтическое лечение</div>
+                </div>
+
+                <!-- Отзыв 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">Е</div>
+                            <div class="reviewer-details">
+                                <h4 class="reviewer-name">Елена Смирнова</h4>
+                                <div class="review-date">3 недели назад</div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        "Восстанавливала передний зуб после травмы. Результат превзошел все ожидания - зуб выглядит абсолютно естественно! Анастасия Викторовна настоящий мастер своего дела. Очень довольна качеством работы!"
+                    </div>
+                    <div class="review-service">Реставрация зубов</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Подвал сайта -->
     <footer class="footer">
