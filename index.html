@@ -1046,12 +1046,15 @@
             /* 📱 ИСПРАВЛЕННАЯ МОБИЛЬНАЯ ФОРМА */
             .modal {
                 padding: 0 !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
                 position: fixed !important;
                 z-index: 9999 !important;
                 background-color: rgba(0, 0, 0, 0.8) !important;
+            }
+
+            .modal[style*="display: flex"] {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
             }
 
             .modal .modal-content {
@@ -1567,7 +1570,7 @@
                 }
             }
             
-            if (applicationModal.style.display === 'block' && event.key === 'Escape') {
+            if ((applicationModal.style.display === 'block' || applicationModal.style.display === 'flex') && event.key === 'Escape') {
                 closeApplicationForm();
             }
         });
@@ -1582,7 +1585,7 @@
             }
             
             if (event.target == applicationModal) {
-                applicationModal.style.display = 'none';
+                closeApplicationForm(); // Используем функцию для правильного закрытия
             }
         }
 
@@ -1601,6 +1604,16 @@
             modal.style.alignItems = '';
             modal.style.justifyContent = '';
             document.body.style.overflow = 'auto'; // Разблокируем прокрутку
+            
+            // Сброс формы
+            const form = document.getElementById('application-form');
+            if (form) {
+                form.reset();
+                // Убираем состояния ошибок и успеха
+                document.getElementById('error-message').style.display = 'none';
+                document.getElementById('success-message').style.display = 'none';
+                document.getElementById('submit-button').style.display = 'block';
+            }
         }
 
         // Обработка отправки формы - отправляем в Telegram
@@ -1813,6 +1826,26 @@
             animatedElements.forEach(element => {
                 animationObserver.observe(element);
             });
+            
+            // 🚀 ПРИНУДИТЕЛЬНО СКРЫВАЕМ МОДАЛЬНЫЕ ОКНА ПРИ ЗАГРУЗКЕ
+            const applicationModal = document.getElementById('application-modal');
+            const certModal = document.getElementById('modal');
+            
+            if (applicationModal) {
+                applicationModal.style.display = 'none';
+                applicationModal.style.alignItems = '';
+                applicationModal.style.justifyContent = '';
+                console.log('✅ Модальное окно заявки скрыто при загрузке');
+            }
+            
+            if (certModal) {
+                certModal.style.display = 'none';
+                console.log('✅ Модальное окно сертификатов скрыто при загрузке');
+            }
+            
+            // Разблокируем прокрутку на всякий случай
+            document.body.style.overflow = 'auto';
+            console.log('✅ Инициализация модальных окон завершена');
         });
     </script>
 
