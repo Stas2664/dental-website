@@ -916,12 +916,15 @@
                 text-align: left !important;
             }
 
-            /* 🚫 УБИРАЕМ ПУСТЫЕ БЛОКИ НА МОБИЛЬНЫХ */
+            /* 🚫 УБИРАЕМ ПУСТЫЕ БЛОКИ НА МОБИЛЬНЫХ - УСИЛЕННАЯ ВЕРСИЯ */
             .stat-item:empty,
             .specialization-item:empty,
             div:empty.animate-on-scroll,
             .achievement-stats div:empty,
-            .about-section div:empty {
+            .about-section div:empty,
+            .specializations-detailed > div:empty,
+            .achievements > div:empty,
+            .philosophy > div:empty {
                 display: none !important;
                 visibility: hidden !important;
                 height: 0 !important;
@@ -930,6 +933,21 @@
                 padding: 0 !important;
                 border: none !important;
                 opacity: 0 !important;
+                overflow: hidden !important;
+                position: absolute !important;
+                left: -9999px !important;
+            }
+
+            /* ДОПОЛНИТЕЛЬНО УБИРАЕМ ПРОБЛЕМНЫЕ АНИМАЦИИ */
+            .animate-on-scroll:not(.specialization-item):not(.stat-item):empty,
+            .fade-in:empty,
+            .fade-in-up:empty,
+            .fade-in-left:empty,
+            .fade-in-right:empty {
+                display: none !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
         }
 
@@ -1846,6 +1864,37 @@
             // Разблокируем прокрутку на всякий случай
             document.body.style.overflow = 'auto';
             console.log('✅ Инициализация модальных окон завершена');
+            
+            // 🗑️ ПРОГРАММНОЕ УДАЛЕНИЕ ПУСТЫХ ЭЛЕМЕНТОВ
+            setTimeout(() => {
+                const emptyElements = document.querySelectorAll('.about-section div:empty, .specialization-item:empty, .stat-item:empty, .achievement-stats div:empty, .specializations-detailed div:empty, .achievements div:empty, .philosophy div:empty');
+                
+                emptyElements.forEach(element => {
+                    console.log('🗑️ Удаляю пустой элемент:', element.className);
+                    element.style.display = 'none';
+                    element.style.visibility = 'hidden';
+                    element.style.height = '0';
+                    element.style.margin = '0';
+                    element.style.padding = '0';
+                    element.style.opacity = '0';
+                    element.style.position = 'absolute';
+                    element.style.left = '-9999px';
+                });
+                
+                // Также проверяем элементы с минимальной высотой, но без контента
+                const suspiciousElements = document.querySelectorAll('.about-section div[class*="animate"]:not(.specialization-item):not(.stat-item):not(.spec-content)');
+                suspiciousElements.forEach(element => {
+                    if (element.textContent.trim() === '' && element.children.length === 0) {
+                        console.log('🗑️ Удаляю подозрительный пустой элемент:', element.className);
+                        element.style.display = 'none';
+                        element.style.height = '0';
+                        element.style.margin = '0';
+                        element.style.padding = '0';
+                    }
+                });
+                
+                console.log('✅ Очистка пустых элементов завершена');
+            }, 1000); // Даём время анимациям загрузиться
         });
     </script>
 
@@ -2494,19 +2543,33 @@
                 max-width: 250px !important;
             }
 
-            /* Улучшения для секции "О враче" */
+            /* 🚫 РАДИКАЛЬНОЕ ИСПРАВЛЕНИЕ СЕКЦИИ "О ВРАЧЕ" */
             .about-section {
-                padding: 30px 10px !important;
+                padding: 20px 10px !important;
             }
 
             .about-description {
                 font-size: 0.9rem !important;
                 padding: 0 5px !important;
+                margin-bottom: 15px !important;
+            }
+
+            /* УБИРАЕМ ВСЕ ЛИШНИЕ ОТСТУПЫ И ВЫСОТЫ */
+            .specializations-detailed,
+            .achievements,
+            .philosophy {
+                margin: 15px 0 !important;
+                padding: 0 !important;
+                min-height: auto !important;
+                height: auto !important;
             }
 
             .specialization-item {
                 padding: 12px !important;
                 gap: 12px !important;
+                margin: 8px 0 !important;
+                min-height: auto !important;
+                height: auto !important;
             }
 
             .spec-icon {
@@ -2515,38 +2578,122 @@
 
             .spec-content h3 {
                 font-size: 1rem !important;
+                margin: 0 0 5px 0 !important;
             }
 
             .spec-content p {
                 font-size: 0.8rem !important;
+                margin: 0 !important;
             }
 
-            .stat-item {
-                padding: 12px !important;
-            }
-
-            /* УБИРАЕМ ПУСТЫЕ ЭЛЕМЕНТЫ */
-            .stat-item:empty,
-            .specialization-item:empty,
-            div:empty.animate-on-scroll {
-                display: none !important;
-                visibility: hidden !important;
-                height: 0 !important;
+            /* КОМПАКТНЫЕ ДОСТИЖЕНИЯ */
+            .achievement-stats {
+                gap: 10px !important;
                 margin: 0 !important;
                 padding: 0 !important;
             }
 
+            .stat-item {
+                padding: 8px !important;
+                margin: 0 !important;
+                min-height: auto !important;
+                height: auto !important;
+            }
+
             .stat-number {
-                font-size: 1.6rem !important;
+                font-size: 1.4rem !important;
+                margin: 0 !important;
             }
 
             .stat-label {
-                font-size: 0.75rem !important;
+                font-size: 0.7rem !important;
+                margin: 0 !important;
+            }
+
+            .philosophy {
+                margin: 15px 0 0 0 !important;
             }
 
             .philosophy blockquote {
                 font-size: 0.9rem !important;
-                padding: 15px 12px !important;
+                padding: 12px !important;
+                margin: 0 !important;
+            }
+
+            /* 🗑️ УБИРАЕМ ВСЕ ПУСТЫЕ И ПРОБЛЕМНЫЕ ЭЛЕМЕНТЫ - СУПЕР ЖЁСТКАЯ ВЕРСИЯ */
+            .stat-item:empty,
+            .specialization-item:empty,
+            div:empty.animate-on-scroll,
+            .achievement-stats div:empty,
+            .specializations-detailed div:empty,
+            .about-section div:empty,
+            .achievements div:empty,
+            .philosophy div:empty,
+            div[class*="animate"]:empty,
+            div[class*="fade"]:empty,
+            div[class*="delay"]:empty {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                width: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                opacity: 0 !important;
+                overflow: hidden !important;
+                position: absolute !important;
+                left: -9999px !important;
+                z-index: -1 !important;
+            }
+
+            /* УБИРАЕМ ДАЖЕ НЕ СОВСЕМ ПУСТЫЕ, НО ПРОБЛЕМНЫЕ ЭЛЕМЕНТЫ */
+            div:not(.specialization-item):not(.stat-item):not(.spec-content):not(.spec-icon):not(.stat-number):not(.stat-label) {
+                min-height: 0 !important;
+            }
+
+            div[class*="animate"]:not(.specialization-item):not(.stat-item) {
+                min-height: auto !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* 🔥 ДОПОЛНИТЕЛЬНЫЕ КОМПАКТНЫЕ ПРАВИЛА ДЛЯ ЭКРАНОВ < 480px */
+            .about-section * {
+                min-height: 0 !important;
+                box-sizing: border-box !important;
+            }
+            
+            .specializations-detailed,
+            .achievements,
+            .philosophy {
+                margin: 8px 0 !important;
+                padding: 0 !important;
+            }
+            
+            .specialization-item {
+                margin: 4px 0 !important;
+                padding: 8px !important;
+            }
+            
+            .achievement-stats {
+                margin: 0 !important;
+                padding: 0 !important;
+                gap: 5px !important;
+            }
+            
+            .stat-item {
+                margin: 0 !important;
+                padding: 4px !important;
+            }
+            
+            .philosophy {
+                margin: 8px 0 0 0 !important;
+            }
+            
+            .philosophy blockquote {
+                margin: 0 !important;
+                padding: 8px !important;
             }
         }
 
