@@ -249,13 +249,16 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 9999;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9);
             animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+            padding: 0;
+            margin: 0;
         }
 
         .modal-content {
@@ -912,6 +915,22 @@
                 margin: 0 !important;
                 text-align: left !important;
             }
+
+            /* 🚫 УБИРАЕМ ПУСТЫЕ БЛОКИ НА МОБИЛЬНЫХ */
+            .stat-item:empty,
+            .specialization-item:empty,
+            div:empty.animate-on-scroll,
+            .achievement-stats div:empty,
+            .about-section div:empty {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                width: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                opacity: 0 !important;
+            }
         }
 
         /* Стили для формы заявки */
@@ -1024,21 +1043,41 @@
                 font-size: 1.6rem;
             }
 
-            /* 📱 УЛУЧШЕННАЯ МОБИЛЬНАЯ ФОРМА */
+            /* 📱 ИСПРАВЛЕННАЯ МОБИЛЬНАЯ ФОРМА */
             .modal {
-                padding: 10px !important;
+                padding: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                position: fixed !important;
+                z-index: 9999 !important;
+                background-color: rgba(0, 0, 0, 0.8) !important;
+            }
+
+            .modal .modal-content {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                margin: 10px !important;
+                max-width: calc(100% - 20px) !important;
+                max-height: calc(100% - 20px) !important;
             }
 
             .application-modal-content {
-                width: 95% !important;
-                max-width: 400px !important;
-                margin: 5px auto !important;
+                width: 100% !important;
+                max-width: 380px !important;
+                margin: 0 !important;
                 padding: 0 !important;
                 border-radius: 15px !important;
-                max-height: 90vh;
-                overflow-y: auto;
-                position: relative;
-                top: 5vh;
+                max-height: 90vh !important;
+                overflow-y: auto !important;
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                background: white !important;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
             }
 
             .form-title {
@@ -1550,13 +1589,17 @@
         // Функции для формы заявки
         function openApplicationForm() {
             const modal = document.getElementById('application-modal');
-            modal.style.display = 'block';
+            modal.style.display = 'flex'; // Используем flex для центрирования
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
             document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
         }
 
         function closeApplicationForm() {
             const modal = document.getElementById('application-modal');
             modal.style.display = 'none';
+            modal.style.alignItems = '';
+            modal.style.justifyContent = '';
             document.body.style.overflow = 'auto'; // Разблокируем прокрутку
         }
 
@@ -2447,6 +2490,17 @@
 
             .stat-item {
                 padding: 12px !important;
+            }
+
+            /* УБИРАЕМ ПУСТЫЕ ЭЛЕМЕНТЫ */
+            .stat-item:empty,
+            .specialization-item:empty,
+            div:empty.animate-on-scroll {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             .stat-number {
